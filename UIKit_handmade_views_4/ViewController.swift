@@ -105,7 +105,6 @@ class ViewController: UIViewController {
         
         descriptionView.topAnchor.constraint(equalTo: topContainerView.bottomAnchor, constant: 50).isActive = true
         descriptionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        descriptionView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40).isActive = true
         descriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         descriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         
