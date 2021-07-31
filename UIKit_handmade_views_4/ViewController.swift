@@ -4,8 +4,17 @@
 //
 //  Created by Matteo on 31/07/2021.
 //
+//  Based on a tutorial on YouTube from Brian Voong:
+//  https://www.youtube.com/watch?v=WCECFfelSHk&list=PL0dzCUj1L5JHdeOlzJtp5zlsdrliJTC7F&index=3
+//
 //  Embedding an Image View inside an outer container to be sure
 //  the image is always kept in the top half of the screen.
+//  Also used:
+//      - UIStackView
+//      - UIPageControl
+//      - extended UIColor to use a personalised colour
+//      - used NSLayoutConstraint.activate instead of adding isActive = true
+//          to each constraint
 //
 
 import UIKit
