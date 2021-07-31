@@ -10,12 +10,15 @@
 
 import UIKit
 
+extension UIColor {
+    static var lightRed = UIColor(displayP3Red: 244/255, green: 210/255, blue: 219/255, alpha: 1)
+}
+
 class ViewController: UIViewController {
     
     let topContainerView: UIImageView = {
         let containerView = UIImageView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        
 //        containerView.backgroundColor = .systemPink
         
         let diamondImageView: UIImageView = {
@@ -24,21 +27,26 @@ class ViewController: UIViewController {
             return imageView
         }()
         
-        containerView.addSubview(diamondImageView)
+        func diamondSetupLayout() {
+            diamondImageView.heightAnchor.constraint(
+                equalTo: containerView.heightAnchor,
+                multiplier: 0.6
+            ).isActive = true
+            diamondImageView.contentMode = .scaleAspectFit
+            diamondImageView.centerXAnchor.constraint(
+                equalTo: containerView.centerXAnchor
+            ).isActive = true
+            diamondImageView.centerYAnchor.constraint(
+                equalTo: containerView.centerYAnchor
+            ).isActive = true
+        }
         
-        diamondImageView.heightAnchor.constraint(
-            equalTo: containerView.heightAnchor,
-            multiplier: 0.6
-        ).isActive = true
-        diamondImageView.contentMode = .scaleAspectFit
-        diamondImageView.centerXAnchor.constraint(
-            equalTo: containerView.centerXAnchor
-        ).isActive = true
-        diamondImageView.centerYAnchor.constraint(
-            equalTo: containerView.centerYAnchor
-        ).isActive = true
+        containerView.addSubview(diamondImageView)
+        diamondSetupLayout()
         
         return containerView
+        
+        
     }()
     
 
@@ -72,6 +80,7 @@ class ViewController: UIViewController {
         view.addSubview(topContainerView)
         view.addSubview(descriptionView)
         
+        setupBottomControls()
         setupLayout()
         
     }
@@ -91,6 +100,53 @@ class ViewController: UIViewController {
         descriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
         descriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
         
+    }
+
+    
+    let prevButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.systemRed
+        button.setTitle("Prev", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = UIColor.systemRed
+        pc.pageIndicatorTintColor = UIColor.lightRed
+        pc.translatesAutoresizingMaskIntoConstraints = false
+        
+        return pc
+    }()
+    
+    let nextButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.systemRed
+        button.setTitle("Next", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+
+    private func setupBottomControls() {
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [prevButton, pageControl, nextButton])
+        bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomControlsStackView.distribution = .fillEqually
+        
+        view.addSubview(bottomControlsStackView)
+        
+        NSLayoutConstraint.activate([
+            bottomControlsStackView.heightAnchor.constraint(equalToConstant: 40),
+            bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomControlsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            bottomControlsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
 
 }
